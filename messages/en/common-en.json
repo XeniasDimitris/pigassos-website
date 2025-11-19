@@ -1,0 +1,32 @@
+{
+  "common": {
+    "learnMore": "Learn More",
+    "contactUs": "Contact Us",
+    "bookNow": "Book Now"
+  },
+  "navigation": {
+    "home": "Home",
+    "services": "Services",
+    "aboutUs": "About Us",
+    "contact": "Contact"
+  },
+  "footer": {
+    "quickLinks": "Quick Links",
+    "contact": "Contact",
+    "email": "Email",
+    "phone": "Phone",
+    "headOffice": "Head Office Address"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "description": "Get in touch with us for any inquiries or support.",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "message": "Message",
+      "submit": "Send Message"
+    },
+    "headOffice": "Agias Napas"
+  }
+}
