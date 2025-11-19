@@ -19,7 +19,6 @@ export default function Home() {
         <TextWithImage
           type='rtl'
           imageSrc='/cigarettes-hd.jpg'
-          imageClassName='round-md'
           imageAlt={t('about.title')}
         >
           <Typography variant='titleL'>{t('about.title')}</Typography>

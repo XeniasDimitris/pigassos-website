@@ -1,6 +1,7 @@
 import { Container } from '@/components/layout/Container';
 import Divider from '@/components/ui/atoms/Divider';
 import { Typography } from '@/components/ui/atoms/Typography';
+import { CheckCircle } from 'lucide-react';
 
 export default function WhyUs() {
   return (
@@ -19,38 +20,43 @@ export default function WhyUs() {
       <Typography variant='titleM' className='mb-4 '>
         Reasons to Partner with Pigassos
       </Typography>
-      <Typography variant='bodyMRegular' className='mb-10 '>
+      <Typography variant='bodyMRegular' className='mb-8 '>
         Our 30 years business experience in Africa
       </Typography>
       <ul className='space-y-4'>
         <li className='flex items-start gap-3'>
-          <span className='text-primary text-xl'>🌟</span>
+          <CheckCircle className='h-5 w-5 text-primary flex-shrink-0' />
+
           <Typography variant='bodyMRegular'>
             Commitment to <strong>transparency and integrity</strong>
           </Typography>
         </li>
         <li className='flex items-start gap-3'>
-          <span className='text-primary text-xl'>🌟</span>
+          <CheckCircle className='h-5 w-5 text-primary flex-shrink-0' />
+
           <Typography variant='bodyMRegular'>
             Our continuous growth and{' '}
             <strong>successful sales track record</strong>
           </Typography>
         </li>
         <li className='flex items-start gap-3'>
-          <span className='text-primary text-xl'>🌟</span>
+          <CheckCircle className='h-5 w-5 text-primary flex-shrink-0' />
+
           <Typography variant='bodyMRegular'>
             Our <strong>assets and network</strong> on the ground
           </Typography>
         </li>
         <li className='flex items-start gap-3'>
-          <span className='text-primary text-xl'>🌟</span>
+          <CheckCircle className='h-5 w-5 text-primary flex-shrink-0' />
+
           <Typography variant='bodyMRegular'>
             Our <strong>excellent cooperation</strong> with our{' '}
             <strong>suppliers and partners</strong>
           </Typography>
         </li>
         <li className='flex items-start gap-3'>
-          <span className='text-primary text-xl'>🌟</span>
+          <CheckCircle className='h-5 w-5 text-primary flex-shrink-0' />
+
           <Typography variant='bodyMRegular'>
             Our{' '}
             <strong>
