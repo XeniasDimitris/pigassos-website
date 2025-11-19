@@ -64,7 +64,7 @@ export const ContactForm = () => {
 
   return (
     <>
-      <Card className='flex flex-1 dark:bg-primary dark:text-primary-foreground'>
+      <Card className='inline-flex dark:bg-primary dark:text-primary-foreground'>
         <CardContent className='px-8 py-4'>
           <form
             onSubmit={(e) => {

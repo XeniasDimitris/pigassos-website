@@ -11,7 +11,6 @@ import {
   MobileNavToggle,
   MobileNavMenu,
   MobileNavItems,
-  TopBar,
 } from '@/components/ui/NavigationBar';
 import { NAV_ITEMS } from '@/constants/navigation';
 
@@ -21,7 +20,6 @@ export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   return (
     <Navbar>
-      <TopBar />
       <div className='w-full h-0.5 bg-white/50' />
       <NavBody>
         <Frame className='justify-between flex-1'>
@@ -31,7 +29,6 @@ export function Header() {
           </Frame>
         </Frame>
       </NavBody>
-
       <MobileNav>
         <MobileNavHeader>
           <Logo />

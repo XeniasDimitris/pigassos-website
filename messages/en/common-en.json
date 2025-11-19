@@ -15,7 +15,7 @@
     "contact": "Contact",
     "email": "Email",
     "phone": "Phone",
-    "headOffice": "Head Office Address"
+    "headOffice": "Address"
   },
   "contact": {
     "title": "Contact Us",
@@ -25,8 +25,19 @@
       "email": "Email",
       "phone": "Phone",
       "message": "Message",
-      "submit": "Send Message"
+      "submit": "Send Message",
+      "successMessage": "Thank you for contacting us! We have received your message and will respond soon."
     },
-    "headOffice": "Agias Napas"
+    "headOffice": "Makariou III, 66 Cronos Court, 6th Floor, Flat Office 64,P.O. Box 1077, Nicosia Cyprus"
+  },
+  "about": {
+    "title": "About Pigassos",
+    "founded": "Founded in 2000",
+    "description": "Since its establishment in 2000 it has become a leading enterprise in its sector, with business ties in more than 16 countries worldwide, including Africa, South America and Europe. We are reputed for our knowledge of the international tobacco industry, our aim to satisfy customer desire and our consistency in responding to the demands of our trusted partners and clients. Our headquarters are in Nicosia, Cyprus and our satellite offices are located in Greece and Africa.<br></br>Our management team consists of the right blend of experienced professionals and young talent. Our executives have more than 30 years’ experience in the cigarette market as well as in doing business in Africa. Our team is keeping in pace with all the latest developments in the tobacco industry, contemporary marketing practices and entrepreneurial management."
+  },
+  "whyUs": {
+    "title": "Why with us?",
+    "quote": "“Our unparalleled knowledge and deep understanding of African culture”",
+    "subtitle": "Reasons to Partner with Pigassos"
   }
 }

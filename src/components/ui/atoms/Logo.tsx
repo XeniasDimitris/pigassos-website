@@ -11,10 +11,10 @@ export const Logo = ({
   return (
     <Link href='/' className='relative flex items-center'>
       <Image
-        src='/logo.jpeg'
+        src='/logo.jpg'
         alt='logo'
-        width={width || 100}
-        height={height || 10}
+        width={width || 150}
+        height={height || 150}
       />
     </Link>
   );

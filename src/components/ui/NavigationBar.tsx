@@ -88,7 +88,9 @@ export const Navbar = ({ children, className }: NavbarProps) => {
   });
 
   return (
-    <header className={cn('fixed inset-x-0 top-10 z-40 w-full ', className)}>
+    <header
+      className={cn('inset-x-0 top-10 z-40 w-full bg-primary', className)}
+    >
       <motion.div
         ref={ref}
         // IMPORTANT: Change this to class of `fixed` if you want the navbar to be fixed
@@ -109,25 +111,11 @@ export const Navbar = ({ children, className }: NavbarProps) => {
 export const NavBody = ({ children, className, visible }: NavBodyProps) => {
   return (
     <motion.div
-      animate={{
-        backdropFilter: visible ? 'blur(5px)' : 'none',
-        boxShadow: visible
-          ? '0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset'
-          : 'none',
-        width: visible ? '100%' : '100%',
-        y: visible ? 0 : 0,
-      }}
-      transition={{
-        type: 'spring',
-        stiffness: 200,
-        damping: 50,
-      }}
       style={{
         minWidth: '800px',
       }}
       className={cn(
-        'relative z-[60] mx-auto hidden w-full max-w-7xl text-white flex-row items-center justify-between self-start rounded-full bg-transparent px-4 py-2 lg:flex dark:bg-transparent',
-        visible && 'bg-primary/90 dark:bg-neutral-950/80',
+        'relative z-[60] mx-auto hidden w-full max-w-7xl text-white flex-row items-center justify-between self-start rounded-full px-4 py-2 lg:flex',
         className
       )}
     >
@@ -166,15 +154,7 @@ export const NavItems = ({ items }: NavItemsProps) => {
                       return (
                         <li key={`sub-item-${subIdx}`} className='list-none'>
                           <NavigationMenuLink asChild active={isSubItemActive}>
-                            <Link
-                              href={subItem.link}
-                              className={cn(
-                                isSubItemActive &&
-                                  'bg-accent text-accent-foreground'
-                              )}
-                            >
-                              {t(subItem.id)}
-                            </Link>
+                            <Link href={subItem.link}>{t(subItem.id)}</Link>
                           </NavigationMenuLink>
                         </li>
                       );
@@ -186,7 +166,7 @@ export const NavItems = ({ items }: NavItemsProps) => {
           }
           return (
             <NavigationMenuItem key={`nav-item-${idx}`}>
-              <NavigationMenuLink asChild active={isActive}>
+              <NavigationMenuLink asChild active={false}>
                 <Link
                   href={item.link ?? '#'}
                   className={cn(
@@ -213,11 +193,6 @@ export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
         boxShadow: visible
           ? '0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset'
           : 'none',
-        width: visible ? '90%' : '100%',
-        paddingRight: visible ? '12px' : '0px',
-        paddingLeft: visible ? '12px' : '0px',
-        borderRadius: visible ? '24px' : '2rem',
-        y: visible ? 10 : 0,
       }}
       transition={{
         type: 'spring',

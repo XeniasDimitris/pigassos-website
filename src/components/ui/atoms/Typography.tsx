@@ -6,7 +6,7 @@ const typographyVariants = cva('', {
   variants: {
     variant: {
       display: 'text-3xl leading-3xl font-extrabold md:text-5xl md:leading-5xl',
-      titleL: 'text-4xl leading-4xl font-bold',
+      titleL: 'text-4xl leading-4xl font-bold text-primary',
       titleM: 'text-3xl leading-3xl font-bold',
       titleS: 'text-2xl leading-2xl font-bold',
       subtitle: 'text-[22px] leading-[30px] font-semibold',

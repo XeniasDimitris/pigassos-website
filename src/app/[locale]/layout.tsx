@@ -7,11 +7,9 @@ import '../globals.css';
 import { Layout } from '@/components/layout/Layout';
 import { Toaster } from '@/components/ui/atoms/Sonner';
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
-import { GoogleTagManager } from '@next/third-parties/google';
-import { GoogleTagManagerNoScript } from '@/scripts/GoogleTagManagerNoScript';
+
 export const metadata: Metadata = {
-  title: 'DEV',
-  description: 'TEST',
+  title: 'Pigassos - Overseas Trading Ltd',
 };
 
 type Props = {
@@ -29,9 +27,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <>
       <html lang={mapper[locale] || 'el-GR'}>
-        <GoogleTagManager gtmId={process.env.GOOGLE_TAG_MANAGER_ID ?? ''} />
         <body className={`${inter.variable} antialiased`}>
-          <GoogleTagManagerNoScript />
           <NextIntlClientProvider>
             <Layout>{children}</Layout>
             <Toaster />

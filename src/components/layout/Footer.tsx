@@ -9,7 +9,6 @@ import {
   BRAND_PHONE,
   BRAND_SOCIAL_MEDIA_ITEMS,
 } from '@/constants/brand';
-import { FOOTER_NAV_ITEMS } from '@/constants/navigation';
 
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
@@ -17,45 +16,19 @@ import { useTranslations } from 'next-intl';
 export const Footer = () => {
   return (
     <footer>
-      <Container className='bg-neutral-900 text-white'>
+      <Container className='bg-primary text-white'>
         <div className='flex flex-col gap-12  md:gap-16 md:flex-row'>
           <div className='flex flex-col flex-1 gap-6  md:items-start'>
             <Logo />
             <SocialMedia items={BRAND_SOCIAL_MEDIA_ITEMS} />
           </div>
-          <FooterNavLinks />
+
           <FooterContactDetails />
         </div>
         <hr className='my-8 border-white/20' />
         <FooterBottomSection />
       </Container>
     </footer>
-  );
-};
-
-const FooterNavLinks = () => {
-  const t = useTranslations();
-  return (
-    <nav className='flex flex-1 flex-col-reverse gap-12 md:flex-row md:gap-8 '>
-      <ul>
-        {FOOTER_NAV_ITEMS.map((category) => (
-          <li key={category.id ?? 'category'}>
-            {category.id && (
-              <Typography variant={'subtitle'} as={'span'}>
-                {t(`footer.${category.id}`)}
-              </Typography>
-            )}
-            <ul className='flex flex-col gap-3 mt-4'>
-              {category.items.map((item) => (
-                <li key={item.id}>
-                  <Link href={item.href}>{t(`navigation.${item.id}`)}</Link>
-                </li>
-              ))}
-            </ul>
-          </li>
-        ))}
-      </ul>
-    </nav>
   );
 };
 
@@ -93,11 +66,9 @@ const FooterContactDetails = () => {
       {BRAND_ADDRESS.map((line) => (
         <Typography key={line.id} variant={'bodyMRegular'}>
           {t(`footer.${line.id}`)}:{' '}
-          <Link href={line.link}>
-            <Typography variant={'linkMRegular'}>
-              {t(`contact.${line.id}`)}
-            </Typography>
-          </Link>
+          <Typography variant={'bodyMRegular'} as='span'>
+            {t(`contact.${line.id}`)}
+          </Typography>
         </Typography>
       ))}
     </div>

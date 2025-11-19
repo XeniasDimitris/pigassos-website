@@ -5,7 +5,7 @@ interface HeroProps {
   image: string;
   className?: string;
   children: React.ReactNode;
-  opacity?: 'md' | 'lg' | 'sm';
+  opacity?: 'md' | 'lg' | 'sm' | null;
 }
 
 export const Hero: React.FC<HeroProps> = ({
