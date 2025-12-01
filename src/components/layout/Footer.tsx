@@ -82,8 +82,7 @@ const FooterBottomSection = () => {
         &copy; {new Date().getFullYear()} {BRAND_NAME}. All rights reserved.
       </Typography>
       <Typography variant={'bodySRegular'} className='text-white/70'>
-        Built with ❤️ by{' '}
-        <Link href='https://www.orbitalstudio.gr'>Orbital</Link>
+        Built with ❤️ by <Link href='https://orbitalstudio.gr'>Orbital</Link>
       </Typography>
     </div>
   );
