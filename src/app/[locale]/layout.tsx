@@ -2,14 +2,26 @@ import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Playfair_Display } from 'next/font/google';
 import '../globals.css';
 import { Layout } from '@/components/layout/Layout';
 import { Toaster } from '@/components/ui/atoms/Sonner';
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+
+const inter = Inter({ 
+  subsets: ['latin'], 
+  variable: '--font-inter',
+  display: 'swap',
+});
+
+const playfair = Playfair_Display({ 
+  subsets: ['latin'], 
+  variable: '--font-playfair',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
-  title: 'Pigassos - Overseas Trading Ltd',
+  title: 'Pigassos - Global Tobacco Trading Excellence',
+  description: 'Your trusted partner in international tobacco distribution with over 30 years of experience in African markets. Premium quality, integrity, and excellence.',
 };
 
 type Props = {
@@ -27,7 +39,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <>
       <html lang={mapper[locale] || 'el-GR'}>
-        <body className={`${inter.variable} antialiased`}>
+        <body className={`${inter.variable} ${playfair.variable} antialiased`}>
           <NextIntlClientProvider>
             <Layout>{children}</Layout>
             <Toaster />

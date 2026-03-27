@@ -10,34 +10,83 @@
     "aboutUs": "About Us",
     "contact": "Contact"
   },
+  "hero": {
+    "tagline": "30+ Years of Excellence",
+    "title": "Global Tobacco Trading Excellence",
+    "subtitle": "Your trusted partner in international tobacco distribution with deep expertise in African markets and a commitment to integrity.",
+    "cta": "Get in Touch",
+    "learnMore": "Learn More"
+  },
   "footer": {
     "quickLinks": "Quick Links",
     "contact": "Contact",
     "email": "Email",
     "phone": "Phone",
-    "headOffice": "Address"
+    "headOffice": "Head Office",
+    "address": "Address"
   },
   "contact": {
-    "title": "Contact Us",
+    "title": "Let's Work Together",
+    "tagline": "Get in Touch",
+    "subtitle": "Have questions about our services? We'd love to hear from you.",
     "description": "Get in touch with us for any inquiries or support.",
     "form": {
-      "name": "Name",
-      "email": "Email",
-      "phone": "Phone",
-      "message": "Message",
+      "name": "Your Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "message": "Your Message",
       "submit": "Send Message",
       "successMessage": "Thank you for contacting us! We have received your message and will respond soon."
     },
-    "headOffice": "Makariou III, 66 Cronos Court, 6th Floor, Flat Office 64,P.O. Box 1077, Nicosia Cyprus"
+    "headOffice": "Makariou III, 66 Cronos Court, 6th Floor, Flat Office 64, P.O. Box 1077, Nicosia Cyprus"
   },
   "about": {
     "title": "About Pigassos",
+    "tagline": "Our Story",
     "founded": "Founded in 2000",
-    "description": "Since its establishment in 2000 it has become a leading enterprise in its sector, with business ties in more than 16 countries worldwide, including Africa, South America and Europe. We are reputed for our knowledge of the international tobacco industry, our aim to satisfy customer desire and our consistency in responding to the demands of our trusted partners and clients. Our headquarters are in Nicosia, Cyprus and our satellite offices are located in Greece and Africa.<br></br>Our management team consists of the right blend of experienced professionals and young talent. Our executives have more than 30 years’ experience in the cigarette market as well as in doing business in Africa. Our team is keeping in pace with all the latest developments in the tobacco industry, contemporary marketing practices and entrepreneurial management."
+    "description": "Since its establishment in 2000 it has become a leading enterprise in its sector, with business ties in more than 16 countries worldwide, including Africa, South America and Europe. We are reputed for our knowledge of the international tobacco industry, our aim to satisfy customer desire and our consistency in responding to the demands of our trusted partners and clients. Our headquarters are in Nicosia, Cyprus and our satellite offices are located in Greece and Africa.<br></br>Our management team consists of the right blend of experienced professionals and young talent. Our executives have more than 30 years' experience in the cigarette market as well as in doing business in Africa. Our team is keeping in pace with all the latest developments in the tobacco industry, contemporary marketing practices and entrepreneurial management."
   },
   "whyUs": {
-    "title": "Why with us?",
-    "quote": "“Our unparalleled knowledge and deep understanding of African culture”",
-    "subtitle": "Reasons to Partner with Pigassos"
+    "title": "Why Partner With Us",
+    "tagline": "Our Advantages",
+    "subtitle": "Over 30 years of business experience in Africa with unparalleled knowledge and deep understanding of local markets.",
+    "quote": "Our unparalleled knowledge and deep understanding of African culture",
+    "reasons": {
+      "transparency": {
+        "title": "Transparency & Integrity",
+        "desc": "We are committed to transparent business practices and maintaining the highest ethical standards."
+      },
+      "trackRecord": {
+        "title": "Proven Track Record",
+        "desc": "Continuous growth and successful sales track record across multiple markets."
+      },
+      "network": {
+        "title": "Global Network",
+        "desc": "Extensive assets and network presence on the ground in key markets."
+      },
+      "cooperation": {
+        "title": "Strong Partnerships",
+        "desc": "Excellent cooperation with our suppliers and partners worldwide."
+      },
+      "ability": {
+        "title": "Brand Excellence",
+        "desc": "Proven ability to turn low performing brands into successful products."
+      }
+    },
+    "brands": {
+      "title": "Our Brands and Top Sellers",
+      "description": "Pigassos offers a diverse brand portfolio of premium and average-price cigarettes, including slim, filtered, menthol and regular. The tobacco varieties we use are Virginia and American blends. Our brands are produced via our cooperating factories worldwide and we ship orders from Europe, Asia and South America. All brands are customized to client/market requests in order to comply fully with the specific demands and regulations of each country."
+    }
+  },
+  "goodPractices": {
+    "title": "Good Practices",
+    "tagline": "Our Values",
+    "description1": "At Pigassos we pride ourselves in Excellence, Integrity, Ethics, Professionalism, Respect to Environment and we are devoted to improve our good practices.",
+    "description2": "Along with a Statement on Transparency and Integrity, Code of Conduct and the relevant transparency procedures, we have also put in place transparent financial techniques, serving altogether as a check and balance procedure while conducting business and interacting with our business partners.",
+    "practices": {
+      "excellence": "Excellence",
+      "transparency": "Transparency",
+      "ethics": "Ethics"
+    }
   }
 }

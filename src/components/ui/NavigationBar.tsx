@@ -16,21 +16,15 @@ import {
 } from '@/components/ui/atoms/Accordion';
 import { Link, usePathname } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
-import { Frame, Menu, Phone, X } from 'lucide-react';
-
+import { Menu, X } from 'lucide-react';
 import {
   motion,
   AnimatePresence,
   useScroll,
   useMotionValueEvent,
 } from 'motion/react';
-
 import React, { useRef, useState } from 'react';
-import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { Typography } from '@/components/ui/atoms/Typography';
-import { BRAND_PHONE } from '@/constants/brand';
-import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
 
 interface NavbarProps {
   children: React.ReactNode;
@@ -89,12 +83,13 @@ export const Navbar = ({ children, className }: NavbarProps) => {
 
   return (
     <header
-      className={cn('inset-x-0 top-10 z-40 w-full bg-primary', className)}
+      className={cn(
+        'fixed inset-x-0 top-0 z-50 w-full transition-all duration-300',
+        visible ? 'bg-background/95 backdrop-blur-md shadow-sm border-b border-border' : 'bg-transparent',
+        className
+      )}
     >
-      <motion.div
-        ref={ref}
-        // IMPORTANT: Change this to class of `fixed` if you want the navbar to be fixed
-      >
+      <motion.div ref={ref}>
         {React.Children.map(children, (child) =>
           React.isValidElement(child)
             ? React.cloneElement(
@@ -111,11 +106,9 @@ export const Navbar = ({ children, className }: NavbarProps) => {
 export const NavBody = ({ children, className, visible }: NavBodyProps) => {
   return (
     <motion.div
-      style={{
-        minWidth: '800px',
-      }}
       className={cn(
-        'relative z-[60] mx-auto hidden w-full max-w-7xl text-white flex-row items-center justify-between self-start rounded-full px-4 py-2 lg:flex',
+        'relative z-[60] mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start px-6 py-4 lg:flex transition-colors duration-300',
+        visible ? 'text-foreground' : 'text-white',
         className
       )}
     >
@@ -130,7 +123,7 @@ export const NavItems = ({ items }: NavItemsProps) => {
 
   return (
     <NavigationMenu viewport={false}>
-      <NavigationMenuList>
+      <NavigationMenuList className='gap-1'>
         {items.map((item, idx) => {
           const isActive = pathname === item.link;
           const hasActiveSubItem = item.items?.some(
@@ -142,19 +135,25 @@ export const NavItems = ({ items }: NavItemsProps) => {
               <NavigationMenuItem key={`nav-item-${idx}`}>
                 <NavigationMenuTrigger
                   className={cn(
-                    hasActiveSubItem && 'bg-accent text-accent-foreground'
+                    'bg-transparent hover:bg-foreground/10 data-[state=open]:bg-foreground/10 rounded-full px-4 py-2 text-sm font-medium transition-colors',
+                    hasActiveSubItem && 'bg-foreground/10'
                   )}
                 >
                   {t(item.id)}
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className='w-[200px] gap-4'>
+                  <ul className='w-[200px] gap-2 p-2'>
                     {item.items.map((subItem, subIdx) => {
                       const isSubItemActive = pathname === subItem.link;
                       return (
                         <li key={`sub-item-${subIdx}`} className='list-none'>
                           <NavigationMenuLink asChild active={isSubItemActive}>
-                            <Link href={subItem.link}>{t(subItem.id)}</Link>
+                            <Link
+                              href={subItem.link}
+                              className='block px-3 py-2 rounded-lg hover:bg-secondary transition-colors text-sm'
+                            >
+                              {t(subItem.id)}
+                            </Link>
                           </NavigationMenuLink>
                         </li>
                       );
@@ -170,8 +169,8 @@ export const NavItems = ({ items }: NavItemsProps) => {
                 <Link
                   href={item.link ?? '#'}
                   className={cn(
-                    'inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-base hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground transition-colors',
-                    isActive && 'bg-accent text-accent-foreground'
+                    'inline-flex h-9 w-max items-center justify-center rounded-full px-4 py-2 text-sm font-medium hover:bg-foreground/10 transition-colors',
+                    isActive && 'bg-foreground/10'
                   )}
                 >
                   {t(item.id)}
@@ -188,20 +187,9 @@ export const NavItems = ({ items }: NavItemsProps) => {
 export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
   return (
     <motion.div
-      animate={{
-        backdropFilter: visible ? 'blur(5px)' : 'none',
-        boxShadow: visible
-          ? '0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset'
-          : 'none',
-      }}
-      transition={{
-        type: 'spring',
-        stiffness: 200,
-        damping: 50,
-      }}
       className={cn(
-        'relative z-50 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between bg-transparent px-0 py-2 lg:hidden',
-        visible && 'bg-primary/90 dark:bg-neutral-950/80',
+        'relative z-50 mx-auto flex w-full flex-col items-center justify-between px-4 py-4 lg:hidden transition-colors duration-300',
+        visible ? 'text-foreground' : 'text-white',
         className
       )}
     >
@@ -235,11 +223,12 @@ export const MobileNavMenu = ({
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.2 }}
           className={cn(
-            'absolute inset-x-0 top-24 z-50 flex w-full flex-col items-start justify-start gap-4 rounded-lg bg-primary px-4 py-8 shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] dark:bg-neutral-950',
+            'absolute inset-x-4 top-20 z-50 flex w-[calc(100%-2rem)] flex-col items-start justify-start gap-4 rounded-2xl bg-card p-6 shadow-xl border border-border',
             className
           )}
         >
@@ -255,32 +244,31 @@ export const MobileNavItems = ({ items, onItemClick }: NavItemsProps) => {
   const pathname = usePathname();
 
   return (
-    <>
+    <div className='w-full space-y-2'>
       {items.map((item, index) => {
         const isActive = pathname === item.link;
         const hasActiveSubItem = item.items?.some(
           (subItem) => pathname === subItem.link
         );
 
-        // If item has inner items, show an Accordion
         if (item.items && item.items.length > 0) {
           return (
             <Accordion
               key={`mobile-accordion-${index}`}
               type='single'
               collapsible
-              className='w-full text-white'
+              className='w-full'
             >
               <AccordionItem value={`item-${index}`} className='border-none'>
                 <AccordionTrigger
                   className={cn(
-                    'py-0 justify-baseline font-normal hover:no-underline',
-                    hasActiveSubItem && 'bg-accent/20 rounded-md px-2'
+                    'py-2 px-3 justify-between font-medium hover:no-underline rounded-lg hover:bg-secondary transition-colors text-foreground',
+                    hasActiveSubItem && 'bg-secondary'
                   )}
                 >
                   {t(item.id)}
                 </AccordionTrigger>
-                <AccordionContent className='gap-4 pl-4 pt-4 flex flex-col'>
+                <AccordionContent className='pl-4 pt-2 space-y-1'>
                   {item.items.map((subItem, subIndex) => {
                     const isSubItemActive = pathname === subItem.link;
                     return (
@@ -289,12 +277,11 @@ export const MobileNavItems = ({ items, onItemClick }: NavItemsProps) => {
                         href={subItem.link}
                         onClick={onItemClick}
                         className={cn(
-                          'transition-colors',
-                          isSubItemActive &&
-                            'bg-accent text-accent-foreground rounded-md px-2 py-1'
+                          'block px-3 py-2 rounded-lg transition-colors text-muted-foreground hover:text-foreground hover:bg-secondary',
+                          isSubItemActive && 'bg-secondary text-foreground'
                         )}
                       >
-                        <span>{t(subItem.id)}</span>
+                        {t(subItem.id)}
                       </Link>
                     );
                   })}
@@ -304,23 +291,21 @@ export const MobileNavItems = ({ items, onItemClick }: NavItemsProps) => {
           );
         }
 
-        // Else leave the link as it is
         return (
           <Link
             key={`mobile-link-${index}`}
             href={item.link ?? '#'}
             onClick={onItemClick}
             className={cn(
-              'relative text-white transition-colors',
-              isActive &&
-                'bg-accent text-accent-foreground rounded-md px-2 py-1'
+              'block px-3 py-2 rounded-lg font-medium transition-colors text-foreground hover:bg-secondary',
+              isActive && 'bg-secondary'
             )}
           >
-            <span className='block'>{t(item.id)}</span>
+            {t(item.id)}
           </Link>
         );
       })}
-    </>
+    </div>
   );
 };
 
@@ -331,45 +316,13 @@ export const MobileNavToggle = ({
   isOpen: boolean;
   onClick: () => void;
 }) => {
-  return isOpen ? (
-    <X className='text-white dark:text-white' onClick={onClick} />
-  ) : (
-    <Menu className='text-white dark:text-white' onClick={onClick} />
-  );
-};
-
-export const NavbarLogo = () => {
   return (
-    <Link href='/' className='relative flex items-center'>
-      <Image src='/next.svg' alt='logo' width={100} height={30} />
-    </Link>
-  );
-};
-
-export const TopBar = () => {
-  return (
-    <Frame className='justify-between flex-1 max-w-7xl mx-auto items-center text-white my-4 px-2'>
-      <Frame className='items-center gap-6' orientation='horizontal'>
-        <Link href={`tel:${BRAND_PHONE[0]}`}>
-          <Frame
-            className='items-center gap-2 underline'
-            orientation='horizontal'
-          >
-            <Phone size={24} />
-            <Typography variant={'bodyLBold'}>{BRAND_PHONE[0]}</Typography>
-          </Frame>
-        </Link>
-        <Link href={`tel:${BRAND_PHONE[1]}`}>
-          <Frame
-            className='items-center gap-2 underline'
-            orientation='horizontal'
-          >
-            <Phone size={24} />
-            <Typography variant={'bodyLBold'}>{BRAND_PHONE[1]}</Typography>
-          </Frame>
-        </Link>
-      </Frame>
-      <LanguageSwitcher />
-    </Frame>
+    <button
+      onClick={onClick}
+      className='p-2 rounded-full hover:bg-foreground/10 transition-colors'
+      aria-label={isOpen ? 'Close menu' : 'Open menu'}
+    >
+      {isOpen ? <X className='w-6 h-6' /> : <Menu className='w-6 h-6' />}
+    </button>
   );
 };

@@ -9,84 +9,110 @@ import {
   BRAND_PHONE,
   BRAND_SOCIAL_MEDIA_ITEMS,
 } from '@/constants/brand';
-
+import { Mail, Phone, MapPin } from 'lucide-react';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 
 export const Footer = () => {
   return (
-    <footer>
-      <Container className='bg-primary text-white'>
-        <div className='flex flex-col gap-12  md:gap-16 md:flex-row'>
-          <div className='flex flex-col flex-1 gap-6  md:items-start'>
-            <Logo />
-            <SocialMedia items={BRAND_SOCIAL_MEDIA_ITEMS} />
+    <footer className='bg-foreground text-background'>
+      <Container className='!py-16'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12'>
+          {/* Brand column */}
+          <div className='lg:col-span-2 space-y-6'>
+            <Logo variant='light' />
+            <Typography variant='bodyMRegular' className='text-background/70 max-w-sm'>
+              Your trusted partner in global tobacco trading with over 30 years of experience in African markets.
+            </Typography>
+            {BRAND_SOCIAL_MEDIA_ITEMS.length > 0 && (
+              <SocialMedia items={BRAND_SOCIAL_MEDIA_ITEMS} />
+            )}
           </div>
 
-          <FooterContactDetails />
+          {/* Contact column */}
+          <div className='space-y-6'>
+            <Typography variant='subtitle' className='text-background'>
+              Contact
+            </Typography>
+            <div className='space-y-4'>
+              <a
+                href={`mailto:${BRAND_EMAIL}`}
+                className='flex items-center gap-3 text-background/70 hover:text-background transition-colors group'
+              >
+                <div className='w-10 h-10 rounded-full bg-background/10 flex items-center justify-center group-hover:bg-background/20 transition-colors'>
+                  <Mail className='w-4 h-4' />
+                </div>
+                <span className='text-sm'>{BRAND_EMAIL}</span>
+              </a>
+              {BRAND_PHONE.map((phone, idx) => (
+                <a
+                  key={phone}
+                  href={`tel:${phone}`}
+                  className='flex items-center gap-3 text-background/70 hover:text-background transition-colors group'
+                >
+                  <div className='w-10 h-10 rounded-full bg-background/10 flex items-center justify-center group-hover:bg-background/20 transition-colors'>
+                    <Phone className='w-4 h-4' />
+                  </div>
+                  <span className='text-sm'>{phone}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Address column */}
+          <FooterAddressColumn />
         </div>
-        <hr className='my-8 border-white/20' />
+
+        <hr className='my-12 border-background/10' />
+
         <FooterBottomSection />
       </Container>
     </footer>
   );
 };
 
-const FooterContactDetails = () => {
+const FooterAddressColumn = () => {
   const t = useTranslations();
+  
   return (
-    <div className='flex flex-col gap-4'>
-      <Typography variant={'subtitle'} as='span'>
-        {t('footer.contact')}
+    <div className='space-y-6'>
+      <Typography variant='subtitle' className='text-background'>
+        {t('footer.address')}
       </Typography>
-      <Typography variant={'bodyMRegular'}>
-        {t('footer.email')}:{' '}
-        <Link href={`mailto:${BRAND_EMAIL}`}>
-          {' '}
-          <Typography variant={'linkMRegular'}>{BRAND_EMAIL}</Typography>
-        </Link>
-      </Typography>
-      <Typography variant={'bodyMRegular'}>
-        {t('footer.phone')}:{' '}
-        {Array.isArray(BRAND_PHONE) ? (
-          BRAND_PHONE.map((phone, idx) => (
-            <span key={phone}>
-              <Link href={`tel:${phone}`}>
-                <Typography variant={'linkMRegular'}>{phone}</Typography>
-              </Link>
-              {idx < BRAND_PHONE.length - 1 && ' | '}
-            </span>
-          ))
-        ) : (
-          <Link href={`tel:${BRAND_PHONE}`}>
-            <Typography variant={'linkMRegular'}>{BRAND_PHONE}</Typography>
-          </Link>
-        )}
-      </Typography>
-      {BRAND_ADDRESS.map((line) => (
-        <Typography key={line.id} variant={'bodyMRegular'}>
-          {t(`footer.${line.id}`)}:{' '}
-          <Typography variant={'bodyMRegular'} as='span'>
-            {t(`contact.${line.id}`)}
-          </Typography>
-        </Typography>
-      ))}
+      <div className='space-y-4'>
+        {BRAND_ADDRESS.map((line) => (
+          <div key={line.id} className='flex items-start gap-3 text-background/70'>
+            <div className='w-10 h-10 rounded-full bg-background/10 flex items-center justify-center flex-shrink-0'>
+              <MapPin className='w-4 h-4' />
+            </div>
+            <div>
+              <Typography variant='bodySBold' className='text-background/90'>
+                {t(`footer.${line.id}`)}
+              </Typography>
+              <Typography variant='bodySRegular' className='text-background/60'>
+                {t(`contact.${line.id}`)}
+              </Typography>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
 const FooterBottomSection = () => {
   return (
-    <div className='justify-between flex flex-col gap-4 md:flex-row md:flex mx-auto'>
-      <Typography variant={'bodySRegular'} className='text-white/70'>
-        &copy; {new Date().getFullYear()} {BRAND_NAME}. All rights reserved.
+    <div className='flex flex-col md:flex-row justify-between items-center gap-4'>
+      <Typography variant='bodySRegular' className='text-background/50'>
+        {new Date().getFullYear()} {BRAND_NAME}. All rights reserved.
       </Typography>
-      <Typography variant={'bodySRegular'} className='text-white/70'>
-        Built with ❤️ by{' '}
+      <Typography variant='bodySRegular' className='text-background/50'>
+        Built with care by{' '}
         <Link
           href='https://orbitalstudio.gr'
           target='_blank'
           rel='noopener noreferrer'
+          className='text-background/70 hover:text-background transition-colors underline-offset-2 hover:underline'
         >
           Orbital
         </Link>

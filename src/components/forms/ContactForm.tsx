@@ -1,6 +1,6 @@
 'use client';
+
 import { Button } from '@/components/ui/atoms/Button';
-import { Card, CardContent } from '@/components/ui/atoms/Card';
 import { Input } from '@/components/ui/atoms/Input';
 import { Textarea } from '@/components/ui/atoms/TextArea';
 import { useTranslations } from 'next-intl';
@@ -8,6 +8,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import { useRef, useState } from 'react';
 import { toast } from 'sonner';
 import { BRAND_EMAIL } from '@/constants/brand';
+import { Send } from 'lucide-react';
 
 export const ContactForm = () => {
   const t = useTranslations();
@@ -17,6 +18,7 @@ export const ContactForm = () => {
     phone: '',
     message: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const handleChange = (
@@ -31,9 +33,11 @@ export const ContactForm = () => {
     email: string;
     message: string;
   }) => {
+    setIsSubmitting(true);
     const recaptchaToken = await recaptchaRef.current?.executeAsync();
     if (!recaptchaToken) {
       alert('Please complete the reCAPTCHA.');
+      setIsSubmitting(false);
       return;
     }
 
@@ -58,70 +62,81 @@ export const ContactForm = () => {
       toast.success(t('contact.form.successMessage'));
     } catch (error) {
       console.error('Error sending email:', error);
-      alert('Failed to send email. Please try again later.');
+      toast.error('Failed to send email. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
     <>
-      <Card className='inline-flex dark:bg-primary dark:text-primary-foreground'>
-        <CardContent className='px-8 py-4'>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              onSubmit(formData);
-            }}
-            className='space-y-4'
+      <div className='w-full max-w-md'>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            onSubmit(formData);
+          }}
+          className='space-y-4'
+        >
+          <Input
+            id='name'
+            name='name'
+            value={formData.name}
+            onChange={handleChange}
+            required
+            placeholder={t('contact.form.name')}
+            className='h-12 bg-card border-border rounded-xl px-4 focus:ring-2 focus:ring-accent focus:border-accent'
+          />
+
+          <Input
+            id='email'
+            name='email'
+            type='email'
+            value={formData.email}
+            onChange={handleChange}
+            required
+            placeholder={t('contact.form.email')}
+            className='h-12 bg-card border-border rounded-xl px-4 focus:ring-2 focus:ring-accent focus:border-accent'
+          />
+
+          <Input
+            id='phone'
+            name='phone'
+            type='tel'
+            value={formData.phone}
+            onChange={handleChange}
+            required
+            placeholder={t('contact.form.phone')}
+            className='h-12 bg-card border-border rounded-xl px-4 focus:ring-2 focus:ring-accent focus:border-accent'
+          />
+
+          <Textarea
+            id='message'
+            name='message'
+            value={formData.message}
+            onChange={handleChange}
+            placeholder={t('contact.form.message')}
+            rows={4}
+            className='bg-card border-border rounded-xl px-4 py-3 focus:ring-2 focus:ring-accent focus:border-accent resize-none'
+          />
+
+          <Button
+            type='submit'
+            size='lg'
+            className='w-full h-12 rounded-xl bg-foreground text-background hover:bg-foreground/90 font-medium'
+            disabled={isSubmitting}
           >
-            <Input
-              id='name'
-              name='name'
-              value={formData.name}
-              onChange={handleChange}
-              required
-              placeholder={t('contact.form.name')}
-            />
-
-            <Input
-              id='email'
-              name='email'
-              type='email'
-              value={formData.email}
-              onChange={handleChange}
-              required
-              placeholder={t('contact.form.email')}
-            />
-
-            <Input
-              id='phone'
-              name='phone'
-              type='tel'
-              value={formData.phone}
-              onChange={handleChange}
-              required
-              placeholder={t('contact.form.phone')}
-            />
-
-            <Textarea
-              id='message'
-              name='message'
-              value={formData.message}
-              onChange={handleChange}
-              placeholder={t('contact.form.message')}
-              rows={4}
-            />
-
-            <Button
-              type='submit'
-              size='lg'
-              className='w-full'
-              variant='default'
-            >
-              {t('contact.form.submit')}
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
+            {isSubmitting ? (
+              'Sending...'
+            ) : (
+              <>
+                {t('contact.form.submit')}
+                <Send className='w-4 h-4 ml-2' />
+              </>
+            )}
+          </Button>
+        </form>
+      </div>
       <ReCAPTCHA
         ref={recaptchaRef}
         sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_KEY ?? ''}

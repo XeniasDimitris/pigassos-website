@@ -4,7 +4,7 @@ export const Container = ({
   children,
   className,
   id,
-  as = 'div',
+  as = 'section',
 }: {
   children: React.ReactNode;
   className?: string;
@@ -14,7 +14,9 @@ export const Container = ({
   const Component = as;
   return (
     <Component className={cn(className)} id={id}>
-      <div className='max-w-7xl mx-auto px-6 py-16'>{children}</div>
+      <div className='max-w-7xl mx-auto px-6 py-20 md:py-24 lg:py-32'>
+        {children}
+      </div>
     </Component>
   );
 };

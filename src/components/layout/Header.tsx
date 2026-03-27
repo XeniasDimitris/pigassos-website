@@ -1,6 +1,6 @@
 'use client';
-import Frame from '@/components/layout/Frame';
 
+import Frame from '@/components/layout/Frame';
 import { Logo } from '@/components/ui/atoms/Logo';
 import {
   Navbar,
@@ -13,19 +13,29 @@ import {
   MobileNavItems,
 } from '@/components/ui/NavigationBar';
 import { NAV_ITEMS } from '@/constants/navigation';
-
 import { useState } from 'react';
+import { Button } from '@/components/ui/atoms/Button';
+import { Link } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const t = useTranslations();
+
   return (
     <Navbar>
-      <div className='w-full h-0.5 bg-white/50' />
       <NavBody>
-        <Frame className='justify-between flex-1'>
+        <Frame className='justify-between flex-1 items-center'>
           <Logo />
-          <Frame className='items-center gap-4'>
+          <Frame className='items-center gap-2'>
             <NavItems items={NAV_ITEMS} />
+            <Button
+              asChild
+              size='sm'
+              className='ml-4 rounded-full bg-foreground text-background hover:bg-foreground/90 hidden lg:inline-flex'
+            >
+              <Link href='#contact'>{t('navigation.contact')}</Link>
+            </Button>
           </Frame>
         </Frame>
       </NavBody>
@@ -46,6 +56,15 @@ export function Header() {
             items={NAV_ITEMS}
             onItemClick={() => setIsMobileMenuOpen(false)}
           />
+          <Button
+            asChild
+            size='lg'
+            className='w-full mt-4 rounded-full'
+          >
+            <Link href='#contact' onClick={() => setIsMobileMenuOpen(false)}>
+              {t('navigation.contact')}
+            </Link>
+          </Button>
         </MobileNavMenu>
       </MobileNav>
     </Navbar>
